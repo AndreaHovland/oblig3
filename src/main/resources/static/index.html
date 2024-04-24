@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinobilletter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylsheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="app.js" type="application/javascript"></script>
+</head>
+
+
+<body>
+<h1>Bestilling av kinobilletter</h1>
+Velg film:
+<select id="velg film her">
+    <option value="">velg film</option>
+    <option value="Dune: Part Two">Dune: Part Two</option>
+    <option value="Kung Fu Panda 4">Kung Fu Panda 4</option>
+    <option value="Ibelin">Ibelin</option>
+</select>
+<label id = "err0" style="color: red;"></label>
+<br>
+<br>
+Antall
+<input type="number" style="width: 30px" min="1" id="antall"/>
+<label id="err1" style="color: red;"></label>
+<br>
+<br>
+<table>
+    <tr>
+        <td>Fornavn</td>
+        <td><input type="text"  placeholder="skriv inn fornavnet ditt"
+                   id="navn"/></td>
+        <td id="err2" style="color: red;"></td>
+    </tr>
+    <tr>
+        <td>Etternavn</td>
+        <td><input type="text" placeholder="skriv inn etternavnet ditt"
+                   id="navn1"/></td>
+        <td id="err3" style="color: red;"></td>
+    </tr>
+    <tr>
+        <td>Epost</td>
+        <td><input type="email" placeholder="skriv inn epost din"
+                   id="email"/></td>
+        <td id="err4" style="color: red;"></td>
+    </tr>
+    <tr>
+        <td>Telefonnr</td>
+        <td><input type="text"  placeholder="skriv inn telefonnr ditt"
+                   id="tlnr" /></td>
+        <td id="err5" style="color: red;"></td>
+    </tr>
+</table>
+<br>
+<br>
+<!-- click-->
+<button onclick="kjop()" class="btn btn-primary">Kjøp billett</button>
+
+
+<br>
+<h2>Alle billetter</h2>
+<ul id="ut"></ul>
+<button onclick="nullstil()" class="btn btn-danger">Slett alle billettene</button>
+
+
+</body>
+</html>
