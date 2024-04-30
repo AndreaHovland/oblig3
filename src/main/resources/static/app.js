@@ -7,7 +7,7 @@ function validateEmail(email) {
 }
 
 
-// Function to validate phone number format
+// Funksjon for å validere telefonnr
 function validatePhoneNumber(tlfnr) {
     // Accepts numbers with optional spaces, hyphens, or parentheses
     const phoneRegex = /^\d{1,4}[-\s]?(\d{1,4}[-\s]?){0,3}\d{1,10}$/;
@@ -51,20 +51,19 @@ function kjop() {
 
 
 
-    // Display the user's ticket information
-    document.getElementById("ut").innerHTML = ut;
 
 
 
 
-    // Check if any required fields are empty
+
+    //
     if (billett.film === "" || billett.antall === "" || billett.fornavn === "" ||
         billett.etternavn === "" || billett.telefonnr === "" || billett.epost === "") {
 
 
 
 
-        // Display specific error messages for each field
+        //
         if (billett.film === "") {
             document.getElementById("err0").innerHTML = "Velg en film";
         }
@@ -104,7 +103,7 @@ function kjop() {
 
 
 
-        // Validate phone number format
+        //
         if (!validatePhoneNumber(billett.telefonnr)) {
             console.error("Ugyldig telefonnummer:", billett.telefonnr);
             document.getElementById("err5").innerHTML = "Skriv inn et gyldig telefonnummer";
@@ -114,7 +113,7 @@ function kjop() {
 
 
 
-        // Add the ticket to the array and display all tickets
+        //
         personliste.push(billett);
         for (let p of personliste) {
             ut += "<tr>";
@@ -124,9 +123,6 @@ function kjop() {
         ut += "</table>"
         document.getElementById("ut").innerHTML = ut;
 
-
-
-        import $ from 'jquery';
 
         // Clear input fields after successful purchase
         document.getElementById("err0").value = "";
@@ -151,11 +147,11 @@ function henteData(alleBilletter){
     let ut = "<table><tr>" + "<th>Fornavn</th><th>Etternavn</th><th>Telefonnr" +
         "</th><th>epost</th><th>Antall</th><th>film</th>" + "</tr>";
     ut += "</table>";
-    document.getElementById("uttt").innerHTML = ut;
+    $("#uttt").html(ut);
 }
 // Function triggered when the "Slett alle billettene" button is clicked
 function nullstil() {
-    $.get("/nullstill", function (){
+    $.get("/slettAlle", function (){
         $("#uttt").html("")
     });
 }
