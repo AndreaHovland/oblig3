@@ -6,12 +6,15 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
+
 // Function to validate phone number format
 function validatePhoneNumber(tlfnr) {
     // Accepts numbers with optional spaces, hyphens, or parentheses
     const phoneRegex = /^\d{1,4}[-\s]?(\d{1,4}[-\s]?){0,3}\d{1,10}$/;
     return phoneRegex.test(tlfnr);
 }
+
+
 
 
 // Function triggered when the "Kjøp billett" button is clicked
@@ -23,6 +26,8 @@ function kjop() {
     document.getElementById("err3").innerHTML = "";
     document.getElementById("err4").innerHTML = "";
     document.getElementById("err5").innerHTML = "";
+
+
 
 
     let ut = "";
@@ -37,18 +42,26 @@ function kjop() {
     }
 
 
+
+
     // Display a table header
     ut += "<table><tr><th>Film</th><th>Antall</th><th>Fornavn" +
         "</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th>" + "</tr>";
+
+
 
 
     // Display the user's ticket information
     document.getElementById("ut").innerHTML = ut;
 
 
+
+
     // Check if any required fields are empty
     if (billett.film === "" || billett.antall === "" || billett.fornavn === "" ||
         billett.etternavn === "" || billett.telefonnr === "" || billett.epost === "") {
+
+
 
 
         // Display specific error messages for each field
@@ -65,11 +78,15 @@ function kjop() {
             document.getElementById("err3").innerHTML = "Skriv noe inn i etternavnet";
         }
         if (billett.telefonnr === "") {
-            document.getElementById("err5").innerHTML = "Skriv noe inn i telefonnr";
+            document.getElementById("err4").innerHTML = "Skriv noe inn i telefonnr";
         }
         if (billett.epost === "") {
-            document.getElementById("err4").innerHTML = "Skriv noe inn i epost";
+            document.getElementById("err5").innerHTML = "Skriv noe inn i epost";
         }
+
+
+
+
 
 
 
@@ -83,12 +100,18 @@ function kjop() {
 
 
 
+
+
+
+
         // Validate phone number format
         if (!validatePhoneNumber(billett.telefonnr)) {
             console.error("Ugyldig telefonnummer:", billett.telefonnr);
             document.getElementById("err5").innerHTML = "Skriv inn et gyldig telefonnummer";
             return;
         }
+
+
 
 
         // Add the ticket to the array and display all tickets
@@ -101,6 +124,9 @@ function kjop() {
         ut += "</table>"
         document.getElementById("ut").innerHTML = ut;
 
+
+
+        import $ from 'jquery';
 
         // Clear input fields after successful purchase
         document.getElementById("err0").value = "";
@@ -117,10 +143,11 @@ function kjop() {
 function hentAlle() {
     $.get("/hentAlle", function (data){
         henteData(data);
-        });
+    });
 }
 
-    function henteData(alleBilletter){
+
+function henteData(alleBilletter){
     let ut = "<table><tr>" + "<th>Fornavn</th><th>Etternavn</th><th>Telefonnr" +
         "</th><th>epost</th><th>Antall</th><th>film</th>" + "</tr>";
     ut += "</table>";
