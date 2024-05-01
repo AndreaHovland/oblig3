@@ -1,4 +1,4 @@
-// Array to store purchased tickets
+// Array for å lagre kjøpte biletter
 let personliste = [];
 // Function to validate email format
 function validateEmail(email) {
@@ -14,7 +14,7 @@ function validatePhoneNumber(tlfnr) {
     return phoneRegex.test(tlfnr);
 }
 
-// Function triggered when the "Kjøp billett" button is clicked
+// Funksjon for "Kjøp billett" knappen
 function kjop() {
     // Clear previous error messages
     document.getElementById("err0").innerHTML = "";
@@ -40,13 +40,9 @@ function kjop() {
 
 
 
-    // Display a table header
 
 
 
-
-
-    //
     if (billett.film === "" || billett.antall === "" || billett.fornavn === "" ||
         billett.etternavn === "" || billett.telefonnr === "" || billett.epost === "") {
 
@@ -79,22 +75,19 @@ function kjop() {
         }
 
 
-
-        //
         if (!validatePhoneNumber(billett.telefonnr)) {
             console.error("Ugyldig telefonnummer:", billett.telefonnr);
             document.getElementById("err5").innerHTML = "Skriv inn et gyldig telefonnummer";
             return;
         }
 
-        //
         personliste.push(billett);
 
 
 
 
 
-        // Clear input fields after successful purchase
+        // Clear input fields
         document.getElementById("err0").value = "";
         document.getElementById("antall").value = "";
         document.getElementById("navn").value = "";
@@ -141,7 +134,7 @@ function henteData(alleBilletter){
     document.getElementById("ut").innerHTML = ut;
     }
 
-// Function triggered when the "Slett alle billettene" button is clicked
+// "Slett alle billettene"
 function nullstil() {
     $.get("/slettAlle", function (){
         hentAlle();
