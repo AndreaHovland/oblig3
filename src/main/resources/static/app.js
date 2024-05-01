@@ -14,9 +14,6 @@ function validatePhoneNumber(tlfnr) {
     return phoneRegex.test(tlfnr);
 }
 
-
-
-
 // Function triggered when the "Kjøp billett" button is clicked
 function kjop() {
     // Clear previous error messages
@@ -26,7 +23,6 @@ function kjop() {
     document.getElementById("err3").innerHTML = "";
     document.getElementById("err4").innerHTML = "";
     document.getElementById("err5").innerHTML = "";
-
 
 
 
@@ -45,12 +41,6 @@ function kjop() {
 
 
     // Display a table header
-    ut += "<table><tr><th>Film</th><th>Antall</th><th>Fornavn" +
-        "</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th>" + "</tr>";
-
-
-
-
 
 
 
@@ -59,7 +49,6 @@ function kjop() {
     //
     if (billett.film === "" || billett.antall === "" || billett.fornavn === "" ||
         billett.etternavn === "" || billett.telefonnr === "" || billett.epost === "") {
-
 
 
 
@@ -83,23 +72,11 @@ function kjop() {
             document.getElementById("err5").innerHTML = "Skriv noe inn i epost";
         }
 
-
-
-
-
-
-
-
     } else {
         if (!validateEmail(billett.epost)) {
             document.getElementById("err4").innerHTML = "Skriv inn en gyldig e-postadresse";
             return;
         }
-
-
-
-
-
 
 
 
@@ -110,18 +87,11 @@ function kjop() {
             return;
         }
 
-
-
-
         //
         personliste.push(billett);
-        for (let p of personliste) {
-            ut += "<tr>";
-            ut += "<td>" + p.film + "</td><td>" + p.antall + "</td><td>" + p.fornavn + "</td><td>" + p.etternavn + "</td><td>" + p.telefonnr + "</td><td>" + p.epost + "</td>"
-            ut += "</tr>";
-        }
-        ut += "</table>"
-        document.getElementById("ut").innerHTML = ut;
+
+
+
 
 
         // Clear input fields after successful purchase
@@ -131,27 +101,49 @@ function kjop() {
         document.getElementById("navn1").value = "";
         document.getElementById("tlnr").value = "";
         document.getElementById("email").value = "";
+        console.log(billett);
+      /*  $.ajax({
+            url:"/lagre",
+            type:'GET',
+            contentType:'application/json',
+            data:JSON.stringify(billett),
+            success: function (){
+                console.log(billett);
+                hentAlle();
+            }
+
+        }); */
         $.post("/lagre", billett, function (){
+            console.log(billett);
             hentAlle();
         });
     }
 }
 function hentAlle() {
     $.get("/hentAlle", function (data){
+        console.log(data);
         henteData(data);
     });
 }
 
 
 function henteData(alleBilletter){
-    let ut = "<table><tr>" + "<th>Fornavn</th><th>Etternavn</th><th>Telefonnr" +
-        "</th><th>epost</th><th>Antall</th><th>film</th>" + "</tr>";
-    ut += "</table>";
-    $("#uttt").html(ut);
-}
+    console.log(alleBilletter);
+  let  ut = "<table><tr><th>Film</th><th>Antall</th><th>Fornavn" +
+        "</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th>" + "</tr>";
+    for (let p of alleBilletter) {
+        console.log(p.film);
+        ut += "<tr>";
+        ut += "<td>" + p.film + "</td><td>" + p.antall + "</td><td>" + p.fornavn + "</td><td>" + p.etternavn + "</td><td>" + p.telefonnr + "</td><td>" + p.epost + "</td>"
+        ut += "</tr>";
+    }
+    ut += "</table>"
+    document.getElementById("ut").innerHTML = ut;
+    }
+
 // Function triggered when the "Slett alle billettene" button is clicked
 function nullstil() {
     $.get("/slettAlle", function (){
-        $("#uttt").html("")
+        hentAlle();
     });
 }

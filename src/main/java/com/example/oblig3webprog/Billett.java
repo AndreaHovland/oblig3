@@ -7,6 +7,9 @@ public class Billett {
     private String telefonNr;
     private String epost;
 
+    public Billett() {
+    }
+
     public Billett(String film, String antall, String fornavn, String etternavn, String telefonNr, String epost) {
         this.film = film;
         this.antall = antall;

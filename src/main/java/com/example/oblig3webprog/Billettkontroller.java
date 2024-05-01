@@ -15,7 +15,7 @@ public class Billettkontroller {
     private BillettRepository rep;
 
     @PostMapping("/lagre")
-    public void lagreBillett(@RequestBody Billett billett) {
+    public void lagreBillett( Billett billett) {
         rep.lagreBillett(billett);
     }
 
